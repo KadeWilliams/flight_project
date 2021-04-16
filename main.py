@@ -11,17 +11,20 @@ my_phone = os.environ['my_phone']
 twilio_phone = os.environ['twilio_phone']
 
 dm = DataManager()
-sheet_data = dm.get_data()
+prices = dm.get_prices()
+users = dm.get_users()
 
 # Updates the dictionary element for the appropriate IATA Code corresponding to the city column
 
-for elem in sheet_data:
+for elem in prices:
     if elem['iataCode'] == '':
         dm.update_iata_code(elem)
 
-for elem in sheet_data:
+for elem in prices:
     fd = FlightData()
     data = fd.get_prices(elem['iataCode'])
     if data[0] < int(elem['lowestPrice']):
         nm = NotificationManager()
-        nm.notify(data)
+        # nm.notify(data)
+        for j in users:
+            nm.send_emails(data, j['email'])
