@@ -16,13 +16,12 @@ class DataManager:
         return data
 
     def update_iata_code(self, dict):
-        if dict['iataCode'] == '':
-            fs = FlightSearch()
-            iata_code = fs.get_code(dict['city'])
-            body = {
-                'price': {
-                    'iataCode': iata_code
-                }
+        fs = FlightSearch()
+        iata_code = fs.get_code(dict['city'])
+        body = {
+            'price': {
+                'iataCode': iata_code
             }
-            response = requests.put(f'{SHEETY_ENDPOINT}/{dict["id"]}', json=body, headers=header)
-            print(response.text)
+        }
+        response = requests.put(f'{SHEETY_ENDPOINT}/{dict["id"]}', json=body, headers=header)
+        print(response.text)

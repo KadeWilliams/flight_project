@@ -5,5 +5,7 @@ dm = DataManager()
 sheet_data = dm.get_data()
 
 # Updates the dictionary element for the appropriate IATA Code corresponding to the city column
-# for elem in sheet_data:
-    # dm.update_iata_code(elem)
+
+for elem in sheet_data:
+    if elem['iataCode'] == '':
+        dm.update_iata_code(elem)
