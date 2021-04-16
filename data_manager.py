@@ -1,9 +1,13 @@
+import os
+
 import requests
 from flight_search import FlightSearch
 
+auth = os.environ['Authorization']
+
 SHEETY_ENDPOINT = 'https://api.sheety.co/a2f0b06de8b5c1d6f115132939c277f7/flightDeals/prices'
 header = {
-    'Authorization': 'Bearer zf#T3WgPDmM*HbFAUtujz37BJq9a%8RA'
+    'Authorization': auth
 }
 
 
